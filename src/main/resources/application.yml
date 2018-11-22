@@ -1,0 +1,9 @@
+server:
+  port: 8888
+spring:
+  kafka:
+    consumer:
+      enable-auto-commit: true
+      group-id: test-consumer-group
+      auto-offset-reset: latest
+      bootstrap-servers: 47.105.54.128:8991

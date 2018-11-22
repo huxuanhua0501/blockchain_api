@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockchain.dao.BlockchainDao">
+    <!--目的：为Dao接口方法提供SQL语句-->
+
+
+    <select id="getCity" resultType="java.util.Map">
+        SELECT *
+        FROM ad_city
+    </select>
+
+    <insert id="insertChain">
+        INSERT INTO demo_chain (current_chain, upper_chain, chain_content, chain_type, height, size, creat_time)
+        VALUES (#{map.current_chain}, #{map.upper_chain}, #{map.chain_content}, #{map.chain_type}, #{map.height},
+                #{map.size}, now())
+    </insert>
+
+    <select id="getChain" resultType="java.util.Map">
+        SELECT
+            current_chain,
+            height
+        FROM demo_chain
+        ORDER BY creat_time DESC  LIMIT 1;
+    </select>
+    <select id="getData" resultType="java.lang.String">
+        SELECT chain_content
+        FROM demo_chain
+        WHERE current_chain = #{chain};
+    </select>
+
+
+    <select id="getMaterialId" resultType="java.lang.String">
+        SELECT id AS material_id
+        FROM
+            demo_material
+        WHERE md5 = #{material_md5};
+    </select>
+
+    <select id="getResourceIdAndMediaId" resultType="java.util.Map">
+        SELECT
+            dr.media_id AS media_id,
+            dr.id       AS resource_id
+        FROM
+            demo_resource dr
+            LEFT JOIN demo_resource_info dri ON dr.id = dri.resource_id
+        WHERE
+            dri.number = #{bno}
+    </select>
+    <select id="getAdslotId" resultType="java.lang.String">
+        SELECT id AS adslot_id
+        FROM
+            demo_adslot
+        WHERE
+            resource_id = #{resource_id}
+
+            AND duration = #{duration}
+    </select>
+    <select id="getThrow" resultType="java.util.Map">
+        SELECT
+            id AS throw_id,
+            city,
+            customer_id
+
+        FROM
+            demo_throw
+        WHERE
+            material = #{map.material_id}
+
+            AND adslot_id = #{map.adslot_id}
+
+            AND resource_id = #{map.resource_id}
+            AND sdate &lt;= #{map.date}
+            AND edate &gt;= #{map.date}
+    </select>
+    <insert id="insertPlayinfo" >
+        INSERT INTO demo_playinfo (throw_id, material_md5, resource_info_number, sdate, edate, createtime,is_onchain)
+        VALUES (#{map.throw_id}, #{map.material_md5}, #{map.bno}, #{map.sdate}, #{map.edate}, #{map.createtime},2)
+    </insert>
+
+    <select id="getId" resultType="java.lang.Integer">
+        SELECT
+            id
+        FROM
+            demo_playinfo
+        ORDER BY
+            id DESC
+        LIMIT 1
+    </select>
+
+    <update id="insertOrUpdateDemo_Report">
+        <selectKey keyProperty="count" resultType="int" order="BEFORE">
+            SELECT count(1) FROM demo_report WHERE md5Key=#{map.md5Key}
+        </selectKey>
+        <if test="count == 0">
+            INSERT INTO demo_report (
+            resource_id,
+            adslot_id,
+            throw_id,
+            media_id,
+            customer_id,
+            city_code,
+            play_num,
+            date,
+            material_md5,
+            createtime,
+            md5Key
+            )
+            VALUES
+            (
+            #{map.resource_id},
+            #{map.adslot_id},
+            #{map.throw_id},
+            #{map.media_id},
+            #{map.customer_id},
+            #{map.city},
+            1,
+            #{map.date},
+            #{map.material_md5},
+            #{map.createtime},
+            #{map.md5Key}
+            )
+        </if>
+        <if test="count>0">
+            UPDATE
+            demo_report
+            SET
+            play_num = play_num +1
+            WHERE
+            md5Key=#{map.md5Key}
+        </if>
+    </update>
+</mapper>
