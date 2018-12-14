@@ -1,6 +1,8 @@
 package com.blockchain.service;
 
 
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +21,10 @@ public interface IBoxStatusService {
 
     void insBox(Map<String, Object> map);
 
-    void insMateriel(List<Map<String,Object>> list,String box_id);
+    void insMateriel(List<Map<String, Object>> list, String box_id);
+
+    void delSchedule(String box_id);
+
+    void insSchedule(List<Map<String, Object>> list);
 
 }

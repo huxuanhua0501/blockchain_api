@@ -19,8 +19,12 @@ public interface BoxStatusDao {
 
     void delBox(String box_id);
 
+    void delSchedule(String box_id);
+
     void insBox(@Param("map") Map<String, Object> map);
 
-    void insMateriel(@Param("list")List<Map<String,Object>> list,@Param("box_id") String box_id);
+    void insMateriel(@Param("list") List<Map<String, Object>> list, @Param("box_id") String box_id);
+
+    void insSchedule(@Param("list") List<Map<String, Object>> list);
 
 }

@@ -28,4 +28,15 @@
             (#{map.name}, #{box_id}, #{map.long}, #{map.bt}, #{map.et})
         </foreach>
     </insert>
+    <insert id="insSchedule">
+        INSERT into cord_device_schedule(box_id,type,rate,set_day,status,name,updatetime)
+        VALUES
+        <foreach item="map" index="index" collection="list"
+                 separator=",">
+            ( #{map.box_id},#{map.type}, #{map.rate}, #{map.set_day}, #{map.status}, #{map.name}, now())
+        </foreach>
+    </insert>
+    <delete id="delSchedule">
+        DELETE from cord_device_schedule where box_id=#{box_id};
+    </delete>
 </mapper>

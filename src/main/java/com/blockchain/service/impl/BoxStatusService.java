@@ -5,7 +5,6 @@ import com.blockchain.service.IBoxStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +36,17 @@ public class BoxStatusService implements IBoxStatusService {
     }
 
     @Override
-    public void insMateriel(List<Map<String,Object>> list,String box_id) {
-        boxStatusDao.insMateriel(list,box_id);
+    public void insMateriel(List<Map<String, Object>> list, String box_id) {
+        boxStatusDao.insMateriel(list, box_id);
+    }
+
+    @Override
+    public void delSchedule(String box_id) {
+        boxStatusDao.delSchedule(box_id);
+    }
+
+    @Override
+    public void insSchedule(List<Map<String, Object>> list) {
+        boxStatusDao.insSchedule(list);
     }
 }
