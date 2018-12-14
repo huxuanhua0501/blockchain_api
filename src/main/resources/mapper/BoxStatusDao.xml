@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockchain.dao.BoxStatusDao">
+    <!--目的：为Dao接口方法提供SQL语句-->
+
+
+    <select id="getMd5" resultType="java.lang.String">
+        SELECT md5 FROM cord_work_receive  WHERE box_id =#{box_id}
+
+    </select>
+    <delete id="delBox">
+        DELETE from cord_work_receive where box_id=#{box_id};
+        DELETE from cord_box_materiel where box_id=#{box_id}
+    </delete>
+    <insert id="insBox">
+        INSERT INTO cord_work_receive ( type, box_id, box_name, box_status, last_time, resol, bt, et, md5, time )
+        VALUES
+            (#{map.type},#{map.box_id},#{map.box_name},#{map.box_status},#{map.last_time},#{map.resol},#{map.bt},#{map.et},#{map.md5},#{map.time})
+    </insert>
+
+    <insert id="insMateriel">
+        INSERT INTO cord_box_materiel( materiel_name,box_id,long_time,bt,et)
+        VALUES
+        <foreach item="map" index="index" collection="list"
+                 separator=",">
+            (#{map.name}, #{box_id}, #{map.long}, #{map.bt}, #{map.et})
+        </foreach>
+    </insert>
+</mapper>

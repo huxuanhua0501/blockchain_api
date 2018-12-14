@@ -19,7 +19,7 @@
            stdout将日志信息输出到控制上，为方便开发测试使用
     -->
     <contextName>wifiprobe</contextName>
-    <property name="LOG_PATH" value="/home/iov/adx/logs/wifiprobelog" />
+    <property name="LOG_PATH" value="/home/blockchain/blockchain_api" />
     <!--设置系统日志目录-->
     <property name="APP_DIR" value="log" />
 
