@@ -46,6 +46,7 @@ public class Job2 {
         map.put("roadname", "");
         map.put("projectid", "");
         map.put("resourceids", "");
+        
         try {
             List<Map<String, Object>> mapList = new ArrayList<>();
             String url = "http://y.xlchina.cn:2002/orm/usepoint.aspx";
