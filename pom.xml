@@ -128,7 +128,28 @@
             <artifactId>poi</artifactId>
             <version>4.0.1</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.6</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-codec</artifactId>
+                    <groupId>commons-codec</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.3.0</version>
+            <!-- <exclusions>
+               <exclusion>
+                 <artifactId>slf4j-api</artifactId>
+                 <groupId>org.slf4j</groupId>
+               </exclusion>
+             </exclusions>-->
+        </dependency>
     </dependencies>
 
     <build>

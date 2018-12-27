@@ -7,3 +7,6 @@ spring:
       group-id: test-consumer-group
       auto-offset-reset: latest
       bootstrap-servers: 47.105.54.128:8991
+#server:
+#  tomcat:
+#    max-http-post-size: -1

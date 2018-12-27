@@ -26,5 +26,7 @@ public interface BoxStatusDao {
     void insMateriel(@Param("list") List<Map<String, Object>> list, @Param("box_id") String box_id);
 
     void insSchedule(@Param("list") List<Map<String, Object>> list);
+    void insCord_point_no(@Param("list") List<Map<String, Object>> list);
+    void insCord_point_yes(@Param("list") List<Map<String, Object>> list);
 
 }
