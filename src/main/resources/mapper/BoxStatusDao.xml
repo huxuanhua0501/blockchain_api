@@ -21,11 +21,11 @@
     </insert>
 
     <insert id="insMateriel">
-        INSERT INTO cord_box_materiel( materiel_name,box_id,long_time,bt,et)
+        INSERT INTO cord_box_materiel( materiel_name,md5,box_id,long_time,bt,et,updatetime)
         VALUES
         <foreach item="map" index="index" collection="list"
                  separator=",">
-            (#{map.name}, #{box_id}, #{map.long}, #{map.bt}, #{map.et})
+            (#{map.name},#{map.md5}, #{box_id}, #{map.long}, #{map.bt}, #{map.et},now())
         </foreach>
     </insert>
     <insert id="insSchedule">
@@ -56,12 +56,13 @@
         boardid,
         boardcode,
         degreename,
-        roadname )
+        roadname ,
+        updatetime)
         VALUES
         <foreach item="map" index="index" collection="list"
                  separator=",">
             ( #{map.placetypename},#{map.address}, #{map.BoardTypeName}, #{map.remark}, #{map.placename}, #{map.PSAs},
-            #{map.boardtype},#{map.size},#{map.thestate},#{map.price},#{map.regionname},#{map.boardid},#{map.boardcode},#{map.degreename},#{map.roadname})
+            #{map.boardtype},#{map.size},#{map.thestate},#{map.price},#{map.regionname},#{map.boardid},#{map.boardcode},#{map.degreename},#{map.roadname},now())
         </foreach>
     </insert>
 
@@ -87,7 +88,8 @@
         productName,
         deadline,
         theStateName,
-        roadName
+        roadName,
+        updatetime
         )
         VALUES
         <foreach item="map" index="index" collection="list"
@@ -112,7 +114,8 @@
             #{map.productName},
             #{map.deadline},
             #{map.theStateName},
-            #{map.roadName}
+            #{map.roadName},
+            now()
             )
         </foreach>
     </insert>

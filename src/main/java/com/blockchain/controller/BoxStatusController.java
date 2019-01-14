@@ -95,6 +95,7 @@ public class BoxStatusController {
             for (Map result : mapList) {
                 Map<String, Object> insertMap = new HashMap<>();
                 insertMap.put("name", result.get("name"));
+                insertMap.put("md5", result.get("md5"));
                 insertMap.put("long", result.get("long"));
                 insertMap.put("bt", result.get("bt"));
                 insertMap.put("et", result.get("et"));
